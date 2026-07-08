@@ -1,57 +1,99 @@
-# 🤖 Groq AI Chatbot
+# 🤖 Groq AI Chatbot with Persistent Memory
 
-Live Project Link - https://groq-chatbot-8zua.onrender.com/
+Live Link : https://groq-chatbot-8zua.onrender.com/
 
-A simple AI chatbot built using **Flask** and the **Groq API**. The application features a clean web interface where users can interact with an AI assistant powered by Groq's fast LLM inference.
+An intelligent AI chatbot built using **Flask**, **Groq API**, and **SQLite** that provides real-time AI conversations with **persistent chat memory**. Unlike a basic chatbot, this application stores conversations in a local SQLite database, allowing chat history to remain available even after refreshing the browser.
 
-## 🚀 Features
+---
 
-* 💬 Interactive chatbot interface
-* ⚡ Fast responses using the Groq API
-* 🎨 Simple and responsive frontend
-* 🔒 Secure API key management using environment variables
-* ☁️ Ready for deployment on Render
+## 📸 Preview
+
+> *(Add a screenshot of your chatbot here)*
+
+Example:
+
+<img width="1063" height="627" alt="image" src="https://github.com/user-attachments/assets/e4fe6e14-1ffc-487c-8882-19524c1d4449" />
+
+
+---
+
+## ✨ Features
+
+- 🤖 AI-powered conversations using the **Groq API**
+- 💾 Persistent chat history using **SQLite**
+- 🔄 Conversation history remains after page refresh
+- 🎨 Modern responsive user interface
+- ⚡ Fast AI responses
+- 🗑️ Clear chat functionality
+- 🌐 Deployable on Render
+- 🔐 Environment variable support using `.env`
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Flask (Python)
-* **Frontend:** HTML, CSS, JavaScript
-* **LLM API:** Groq
-* **Deployment:** Render
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Flask (Python)
+
+### AI Model
+- Groq API
+- Llama 3.3 70B Versatile
+
+### Database
+- SQLite
+
+### Deployment
+- Render
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
-```text
+```
 groq-chatbot/
 │
 ├── app.py
+├── database.py
 ├── requirements.txt
 ├── Procfile
 ├── .gitignore
+├── .env
+├── chat.db
+│
 ├── templates/
 │   └── index.html
-├── static/
-│   ├── style.css
-│   └── script.js
-└── .env
+│
+└── static/
+    ├── style.css
+    └── script.js
 ```
 
 ---
 
-## ⚙️ Installation
+## 🚀 Installation
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/groq-chatbot.git
-cd groq-chatbot
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 ```
 
-### 2. Create a virtual environment
+---
+
+### 2. Navigate to the project
+
+```bash
+cd YOUR_REPOSITORY
+```
+
+---
+
+### 3. Create a virtual environment
 
 **Windows**
 
@@ -60,28 +102,33 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-**macOS/Linux**
+**Mac/Linux**
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+---
+
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Create a `.env` file
+---
 
-Add your Groq API key:
+### 5. Create a `.env` file
 
-```env
+```
 GROQ_API_KEY=your_groq_api_key
+SECRET_KEY=your_secret_key
 ```
 
-### 5. Run the application
+---
+
+### 6. Run the application
 
 ```bash
 python app.py
@@ -95,9 +142,9 @@ http://127.0.0.1:5000
 
 ---
 
-## ☁️ Deployment
+## 🌍 Deployment
 
-This project is configured for deployment on **Render**.
+This project can be deployed on **Render**.
 
 ### Build Command
 
@@ -111,49 +158,49 @@ pip install -r requirements.txt
 gunicorn app:app
 ```
 
-Add the following environment variable in your Render dashboard:
+Remember to add these environment variables on Render:
 
-| Variable       | Description       |
-| -------------- | ----------------- |
-| `GROQ_API_KEY` | Your Groq API key |
+- `GROQ_API_KEY`
+- `SECRET_KEY`
 
 ---
 
-## 📸 Demo
+## 🗄️ Database
 
-<img width="802" height="470" alt="Screenshot 2026-07-05 172418" src="https://github.com/user-attachments/assets/f79284f8-b290-4d25-8a2b-93d217ad08fd" />
+The chatbot stores conversations in a SQLite database (`chat.db`).
 
+Each message is stored with:
 
-Example:
+- Role (User/Assistant)
+- Message Content
 
-```
-assets/demo.png
-```
+This allows conversations to persist across page refreshes.
+
+---
+
+## 📷 Screenshots
+
+### Home Page
+
+*(Add screenshot here)*
+
+### Chat Interface
+
+*(Add screenshot here)*
 
 ---
 
 ## 🔮 Future Improvements
 
-* Chat history
-* Conversation memory
-* Dark mode
-* Streaming responses
-* Voice input/output
-* File upload (PDF Q&A)
-* Retrieval-Augmented Generation (RAG)
-* Multi-model support
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to fork the repository, open issues, or submit pull requests.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+- 💬 Multiple chat conversations
+- 🌙 Dark mode
+- 📝 Markdown rendering
+- 💻 Code syntax highlighting
+- 📄 PDF upload and chat
+- 🔍 Web search integration
+- 🎤 Voice input
+- 🤖 Agentic AI with tools
+- ☁️ PostgreSQL cloud database
 
 ---
 
@@ -161,4 +208,10 @@ This project is licensed under the MIT License.
 
 **Shreya Gaur**
 
-If you found this project useful, consider giving it a ⭐ on GitHub!
+- GitHub: https://github.com/shreya22gaur
+
+---
+
+## ⭐ If you found this project useful
+
+Give this repository a ⭐ on GitHub!

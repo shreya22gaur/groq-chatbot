@@ -8,7 +8,7 @@ An intelligent AI chatbot built using **Flask**, **Groq API**, and **SQLite** th
 
 ## 📸 Preview
 
-> *(Add a screenshot of your chatbot here)*
+
 
 Example:
 

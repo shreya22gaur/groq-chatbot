@@ -1,66 +1,118 @@
 
-const input = document.getElementById("message");
+const chatBox = document.getElementById("chat-box");
+const input = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+const clearBtn = document.getElementById("clear-btn");
 
-input.addEventListener("keypress", function(event){
+// ----------------------
+// Add message to screen
+// ----------------------
+function addMessage(role,text){
 
-    if(event.key==="Enter"){
-        sendMessage();
-    }
+    const message=document.createElement("div");
 
-});
+    message.className=`message ${role==="user"?"user":"bot"}`;
+
+    const bubble=document.createElement("div");
+
+    bubble.className="bubble";
+
+    bubble.innerHTML=text;
+
+    message.appendChild(bubble);
+
+    chatBox.appendChild(message);
+
+    chatBox.scrollTop=chatBox.scrollHeight;
+
+}
 
 
-async function sendMessage(){
+// ----------------------
+// Load previous messages
+// ----------------------
+async function loadHistory() {
 
-    const message=input.value.trim();
+    const response = await fetch("/history");
 
-    if(message==="") return;
+    const history = await response.json();
 
-    const chat=document.getElementById("chat-box");
+    chatBox.innerHTML = "";
 
-    chat.innerHTML +=
-    `<p class="user"><b>You:</b> ${message}</p>`;
+    history.forEach(msg => {
 
-    input.value="";
+        if (msg.role === "system") return;
 
-    chat.innerHTML +=
-    `<p id="typing"><i>AI is typing...</i></p>`;
+        addMessage(msg.role, msg.content);
 
-    chat.scrollTop=chat.scrollHeight;
+    });
 
-    const response = await fetch("/chat",{
+}
 
-        method:"POST",
 
-        headers:{
-            "Content-Type":"application/json"
+// ----------------------
+// Send Message
+// ----------------------
+async function sendMessage() {
+
+    const message = input.value.trim();
+
+    if (message === "")
+        return;
+
+    addMessage("user", message);
+
+    input.value = "";
+
+    const response = await fetch("/chat", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
         },
 
-        body:JSON.stringify({
-            message:message
+        body: JSON.stringify({
+            message: message
         })
 
     });
 
     const data = await response.json();
 
-    document.getElementById("typing").remove();
-
-    chat.innerHTML +=
-    `<p class="bot"><b>Bot:</b> ${data.reply}</p>`;
-
-    chat.scrollTop=chat.scrollHeight;
+    addMessage("assistant", data.reply);
 
 }
 
 
-async function clearChat(){
+// ----------------------
+// Clear Chat
+// ----------------------
+async function clearChat() {
 
-    await fetch("/clear",{
-        method:"POST"
+    await fetch("/clear", {
+        method: "POST"
     });
 
-    document.getElementById("chat-box").innerHTML="";
+    chatBox.innerHTML = "";
+
 }
 
 
+// Button Click
+sendBtn.addEventListener("click", sendMessage);
+
+// Enter key
+input.addEventListener("keypress", function(e){
+
+    if(e.key==="Enter")
+        sendMessage();
+
+});
+
+// Clear
+clearBtn.addEventListener("click", clearChat);
+
+
+// Load history on page open
+loadHistory();
